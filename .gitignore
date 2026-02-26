@@ -1,0 +1,43 @@
+# Gradle files
+.gradle/
+build/
+/*/build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log Files
+*.log
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Keystore files (NEVER commit these for enterprise apps)
+*.jks
+*.keystore
+*.p12
+
+# Google Services (if applicable)
+# google-services.json
+
+# External native build artifacts
+.externalNativeBuild/
+.cxx/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Android Studio captures folder
+captures/
+
+# Built artifacts
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Android Profiling
+*.hprof

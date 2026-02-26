@@ -1,0 +1,51 @@
+# Built artifacts
+*.apk
+*.aab
+*.ap_
+*.aar
+*.dex
+*.class
+
+# Generated files
+**/build/
+bin/
+gen/
+out/
+
+# Gradle
+.gradle/
+build/
+
+# Local configuration file
+local.properties
+
+# Proguard
+proguard/
+
+# Logs
+*.log
+*.hprof
+
+# Android Studio
+.idea/
+*.iml
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Google Services (e.g., Firebase)
+google-services.json
+
+# Keystore files
+*.jks
+*.keystore
+
+lint-results.html
+lint-results.xml
+output-metadata.json
+.render.experimental.xml

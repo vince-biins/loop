@@ -25,10 +25,11 @@ import com.project.loop.base.composable.Padding
 import com.project.loop.base.theme.LoopGradients
 import com.project.loop.presentation.auth.components.HeaderSection
 import com.project.loop.presentation.auth.components.SignInForm
+import com.project.loop.presentation.auth.components.SignUpForm
 import com.project.loop.presentation.common.FieldState
 
 @Composable
-fun SignInScreen(modifier: Modifier = Modifier) {
+fun SignUpScreen(modifier: Modifier = Modifier) {
 
 
         Box(
@@ -36,7 +37,7 @@ fun SignInScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .background(LoopGradients.LoopDiagonalGradient)
         ) {
-            SignInContent(
+            SignUpContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = Padding.SIXTEEN_DP, vertical = Padding.TWENTY_FOUR_DP)
@@ -47,7 +48,7 @@ fun SignInScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SignInContent(modifier: Modifier = Modifier) {
+fun SignUpContent(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
@@ -57,23 +58,25 @@ fun SignInContent(modifier: Modifier = Modifier) {
     ) {
         HeaderSection(
             title = stringResource(R.string.app_name),
-            description = stringResource(R.string.sign_in_welcome_message)
+            description = stringResource(R.string.sign_up_welcome_message)
         )
 
         Spacer(modifier = Modifier.height(LoopDp.FORTY_DP))
 
-        SignInForm(
-            userNameField = FieldState(),
-            passwordField = FieldState()
+        SignUpForm(
+            fullNameField = FieldState(),
+            passwordField = FieldState(),
+            confirmPasswordField = FieldState(),
+            emailField = FieldState(),
         )
     }
 }
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
-private fun SignInContentPreview() {
+private fun SignUpContentPreview() {
     MaterialTheme {
-        SignInScreen()
+        SignUpScreen()
     }
 
 }

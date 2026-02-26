@@ -86,8 +86,8 @@ dependencies {
     implementation(libs.coil.network.okhttp)
 
     implementation(libs.okio)
-    implementation(libs.moshi.kotlin)
+//    implementation(libs.moshi.kotlin)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    ksp(libs.moshi.kotlin.codegen)
+//    ksp(libs.moshi.kotlin.codegen)
 }

@@ -1,10 +1,13 @@
 package com.project.loop.base.theme
 
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val LoopPink = Color(0xFFE1067B)
 val LoopPurple = Color(0xFFB32FCF)
+val LoopPurpleDarker = Color(0xFF5214A9)
+val LoopPurple2 = Color(0xFFCF2FBF)
 val LoopOrange = Color(0xFFF7594C)
 val LightBackground = Color(0xFFFDFDFD)
 val LightSurface = Color(0xFFFFFFFF)
@@ -36,5 +39,15 @@ object LoopGradients {
             LoopPink,
             LoopOrange
         )
+    )
+
+    val LoopDiagonalGradient = Brush.linearGradient(
+        colors = listOf(
+            LoopPurple,
+            LoopPink,
+            LoopOrange
+        ),
+        start = Offset(0f, 0f),
+        end = Offset(1000F, 1000F)
     )
 }

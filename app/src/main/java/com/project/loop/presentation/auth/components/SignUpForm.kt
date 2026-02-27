@@ -1,5 +1,6 @@
 package com.project.loop.presentation.auth.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,17 +23,25 @@ import com.project.loop.presentation.common.InputFieldData
 
 @Composable
 fun SignUpForm(
+    modifier: Modifier = Modifier,
     fullNameField: FieldState,
     emailField: FieldState,
+    usernameField: FieldState,
     confirmPasswordField: FieldState,
     passwordField: FieldState,
-    modifier: Modifier = Modifier
+    onSignUpClick: () -> Unit,
+    onSignInClick: () -> Unit,
 ) {
     val signUpFields = listOf(
         InputFieldData(
             placeholder = stringResource(R.string.full_name),
             fieldState = fullNameField,
             leadingIcon = R.drawable.ic_person,
+        ),
+        InputFieldData(
+            placeholder = stringResource(R.string.username),
+            fieldState = usernameField,
+            leadingIcon = R.drawable.ic_username,
         ),
         InputFieldData(
             placeholder = stringResource(R.string.email_address),
@@ -48,7 +57,7 @@ fun SignUpForm(
         InputFieldData(
             placeholder = stringResource(R.string.confirm_password),
             fieldState = confirmPasswordField,
-            leadingIcon = R.drawable.ic_lock,
+            leadingIcon = R.drawable.ic_confirm_lock,
             visualTransformation = PasswordVisualTransformation()
         )
     )
@@ -57,8 +66,7 @@ fun SignUpForm(
         modifier = modifier,
         fields = signUpFields,
         primaryButtonText = stringResource(R.string.sign_up),
-        onPrimaryClick = { /* handle sign up */ },
-        showOtherSignInSection = false,
+        onPrimaryClick = onSignUpClick,
         bottomContent = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -78,7 +86,10 @@ fun SignUpForm(
                     style = MaterialTheme.typography.bodyMedium.copy(
                         color = LoopPurple,
                         fontWeight = FontWeight.W800
-                    )
+                    ),
+                    modifier = Modifier.clickable {
+                        onSignInClick()
+                    }
                 )
             }
         }

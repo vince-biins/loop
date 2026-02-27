@@ -28,26 +28,35 @@ import com.project.loop.presentation.auth.components.SignInForm
 import com.project.loop.presentation.common.FieldState
 
 @Composable
-fun SignInScreen(modifier: Modifier = Modifier) {
+fun SignInScreen(
+    modifier: Modifier = Modifier,
+    onSignInClick: () -> Unit,
+    onNavigateToSignUp: () -> Unit
+) {
 
-
-        Box(
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(LoopGradients.LoopDiagonalGradient)
+    ) {
+        SignInContent(
             modifier = Modifier
                 .fillMaxSize()
-                .background(LoopGradients.LoopDiagonalGradient)
-        ) {
-            SignInContent(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = Padding.SIXTEEN_DP, vertical = Padding.TWENTY_FOUR_DP)
-            )
+                .padding(horizontal = Padding.SIXTEEN_DP, vertical = Padding.TWENTY_FOUR_DP),
+            onSignInClick = onSignInClick,
+            onSignUpClick = onNavigateToSignUp
+        )
 
 
-        }
+    }
 }
 
 @Composable
-fun SignInContent(modifier: Modifier = Modifier) {
+fun SignInContent(
+    modifier: Modifier = Modifier,
+    onSignInClick: () -> Unit,
+    onSignUpClick: () -> Unit,
+) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
@@ -64,7 +73,9 @@ fun SignInContent(modifier: Modifier = Modifier) {
 
         SignInForm(
             userNameField = FieldState(),
-            passwordField = FieldState()
+            passwordField = FieldState(),
+            onSignInClick = onSignInClick,
+            onSignUpClick = onSignUpClick,
         )
     }
 }
@@ -73,7 +84,10 @@ fun SignInContent(modifier: Modifier = Modifier) {
 @Composable
 private fun SignInContentPreview() {
     MaterialTheme {
-        SignInScreen()
+        SignInScreen(
+            onSignInClick = {},
+            onNavigateToSignUp = {}
+        )
     }
 
 }

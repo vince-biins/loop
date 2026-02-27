@@ -23,6 +23,7 @@ val DarkTextSecondary = Color(0xFFBDBDBD)
 val DarkOutline = Color(0xFF444444)
 val ErrorRed = Color(0xFFCF6679)
 
+val trans = Color.Transparent
 
 object LoopGradients {
     val LoopHorizontalGradient = Brush.horizontalGradient(

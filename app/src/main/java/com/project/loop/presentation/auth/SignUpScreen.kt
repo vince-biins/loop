@@ -12,11 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.project.loop.R
@@ -24,31 +22,40 @@ import com.project.loop.base.composable.LoopDp
 import com.project.loop.base.composable.Padding
 import com.project.loop.base.theme.LoopGradients
 import com.project.loop.presentation.auth.components.HeaderSection
-import com.project.loop.presentation.auth.components.SignInForm
 import com.project.loop.presentation.auth.components.SignUpForm
 import com.project.loop.presentation.common.FieldState
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier) {
+fun SignUpScreen(
+    modifier: Modifier = Modifier,
+    onSignUpClick: () -> Unit,
+    onNavigateBackToSignIn: () -> Unit
+) {
 
 
-        Box(
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(LoopGradients.LoopDiagonalGradient)
+    ) {
+        SignUpContent(
             modifier = Modifier
                 .fillMaxSize()
-                .background(LoopGradients.LoopDiagonalGradient)
-        ) {
-            SignUpContent(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = Padding.SIXTEEN_DP, vertical = Padding.TWENTY_FOUR_DP)
-            )
+                .padding(horizontal = Padding.SIXTEEN_DP, vertical = Padding.TWENTY_FOUR_DP),
+            onSignUpClick = onSignUpClick,
+            onSignInClick = onNavigateBackToSignIn,
+        )
 
 
-        }
+    }
 }
 
 @Composable
-fun SignUpContent(modifier: Modifier = Modifier) {
+fun SignUpContent(
+    modifier: Modifier = Modifier,
+    onSignUpClick: () -> Unit,
+    onSignInClick: () -> Unit,
+) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
@@ -68,6 +75,9 @@ fun SignUpContent(modifier: Modifier = Modifier) {
             passwordField = FieldState(),
             confirmPasswordField = FieldState(),
             emailField = FieldState(),
+            usernameField = FieldState(),
+            onSignUpClick = onSignUpClick,
+            onSignInClick = onSignInClick
         )
     }
 }
@@ -76,7 +86,10 @@ fun SignUpContent(modifier: Modifier = Modifier) {
 @Composable
 private fun SignUpContentPreview() {
     MaterialTheme {
-        SignUpScreen()
+        SignUpScreen(
+            onSignUpClick = {},
+            onNavigateBackToSignIn = {}
+        )
     }
 
 }

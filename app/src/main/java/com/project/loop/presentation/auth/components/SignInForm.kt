@@ -1,6 +1,7 @@
 package com.project.loop.presentation.auth.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,9 +49,11 @@ import com.project.loop.presentation.common.InputFieldData
 
 @Composable
 fun SignInForm(
+    modifier: Modifier = Modifier,
     userNameField: FieldState,
     passwordField: FieldState,
-    modifier: Modifier = Modifier
+    onSignInClick: () -> Unit,
+    onSignUpClick: () -> Unit
 ) {
     val signInFields = listOf(
         InputFieldData(
@@ -72,9 +75,28 @@ fun SignInForm(
         modifier = modifier,
         fields = signInFields,
         primaryButtonText = stringResource(R.string.sign_in),
-        onPrimaryClick = { /* handle sign in */ },
-        showOtherSignInSection = true,
+        onPrimaryClick = onSignInClick,
         bottomContent = {
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                HorizontalDivider(modifier = Modifier.weight(1f))
+                Text(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    text = stringResource(R.string.or_continue_with),
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        color = Color.Gray,
+                        fontWeight = FontWeight.W600
+                    )
+                )
+                HorizontalDivider(modifier = Modifier.weight(1f))
+            }
+
+            OtherSigInSection()
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -93,128 +115,20 @@ fun SignInForm(
                     style = MaterialTheme.typography.bodyMedium.copy(
                         color = LoopPurple,
                         fontWeight = FontWeight.W800
-                    )
+                    ),
+                    modifier = Modifier.clickable{
+                        onSignUpClick()
+                    }
                 )
             }
         }
     )
 }
-//
-//@Composable
-//fun SignInForm(
-//    userNameField: FieldState,
-//    passwordField: FieldState,
-//    modifier: Modifier = Modifier
-//) {
-//    Box(
-//        modifier = modifier
-//            .fillMaxWidth()
-//            .shadow(
-//                elevation = 12.dp,
-//                shape = RoundedCornerShape(LoopDp.TWENTY_FOUR_DP),
-//                clip = true,
-//                spotColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-//            )
-//            .clip(RoundedCornerShape(LoopDp.EIGHT_DP))
-//            .background(LightBackground),
-//        contentAlignment = Alignment.Center
-//    ) {
-//        Column(
-//            modifier = modifier.padding(Padding.TWENTY_FOUR_DP),
-//            verticalArrangement = Arrangement.spacedBy(
-//                Spacing.SIXTEEN_DP,
-//                Alignment.CenterVertically
-//            ),
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//        ) {
-//            InputSection(
-//                userNameField = userNameField,
-//                passwordField = passwordField,
-//            )
-//
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.End
-//            ) {
-//                Text(
-//                    text = stringResource(R.string.forgot_password),
-//                    style = MaterialTheme.typography.bodySmall.copy(
-//                        color = LoopPurple,
-//                        fontWeight = FontWeight.W800
-//                    )
-//                )
-//            }
-//
-//            LoopButton(
-//                modifier = Modifier.fillMaxWidth(),
-//                text = stringResource(R.string.sign_in),
-//                onClick = {},
-//                tailingIcon = {
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.ic_arrow_forward),
-//                        contentDescription = null,
-//                        tint = Color.White,
-//                        modifier = Modifier.size(20.dp)
-//                    )
-//                }
-//            )
-//
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.Center
-//            ) {
-//                HorizontalDivider(
-//                    modifier = Modifier.weight(1f)
-//                )
-//                Text(
-//                    modifier = Modifier.padding(horizontal = Padding.FOUR_DP),
-//                    text = stringResource(R.string.or_continue_with),
-//                    style = MaterialTheme.typography.bodyMedium.copy(
-//                        color = Color.Gray,
-//                        fontWeight = FontWeight.W600
-//                    )
-//                )
-//                HorizontalDivider(
-//                    modifier = Modifier.weight(1f)
-//                )
-//            }
-//
-//            OtherSigInSection()
-//
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.Center
-//            ) {
-//
-//                Text(
-//
-//                    text = stringResource(R.string.dont_have_account),
-//                    style = MaterialTheme.typography.bodyMedium.copy(
-//                        color = Color.Gray,
-//                        fontWeight = FontWeight.W500
-//                    )
-//                )
-//                Text(
-//                    text = stringResource(R.string.sign_up),
-//                    style = MaterialTheme.typography.bodyMedium.copy(
-//                        color = LoopPurple,
-//                        fontWeight = FontWeight.W800
-//                    )
-//                )
-//
-//            }
-//
-//        }
-//    }
-//}
 
 @Composable
 fun OtherSigInSection(modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -261,55 +175,6 @@ fun OtherSigInSection(modifier: Modifier = Modifier) {
 
 }
 
-@Composable
-fun InputSection(
-    userNameField: FieldState,
-    passwordField: FieldState,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(Spacing.EIGHT_DP, Alignment.CenterVertically),
-        horizontalAlignment = Alignment.CenterHorizontally,
-
-        ) {
-        LoopTextField(
-            title = stringResource(R.string.email_or_username),
-            singleLine = true,
-            placeholder = stringResource(R.string.email_or_username),
-            onValueChange = userNameField.onValueChange,
-            value = userNameField.value,
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(R.drawable.ic_email),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = Color.Gray
-                )
-            },
-            backgroundColor = Color.White,
-        )
-
-        LoopTextField(
-            title = stringResource(R.string.password),
-            placeholder = stringResource(R.string.password),
-            singleLine = true,
-            onValueChange = passwordField.onValueChange,
-            value = passwordField.value,
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(R.drawable.ic_lock),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    tint = Color.Gray
-                )
-            },
-            backgroundColor = Color.White,
-            visualTransformation = PasswordVisualTransformation()
-        )
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun SignInFormPreview() {
@@ -324,34 +189,9 @@ private fun SignInFormPreview() {
         ) {
             SignInForm(
                 userNameField = FieldState(),
-                passwordField = FieldState()
-            )
-        }
-    }
-
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun InputSectionPreview() {
-    MaterialTheme() {
-
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            InputSection(
-                userNameField = FieldState(),
-                passwordField = FieldState()
-            )
-
-            InputSection(
-                userNameField = FieldState(
-                    value = "username@mail.com"
-                ),
-                passwordField = FieldState(
-                    value = "password"
-                )
+                passwordField = FieldState(),
+                onSignInClick = {},
+                onSignUpClick = {},
             )
         }
     }

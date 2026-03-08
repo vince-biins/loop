@@ -25,4 +25,5 @@ object LoopDp {
     val FORTY_DP = 40.dp
     val FORTY_EIGHT_DP = 48.dp
     val FIFTY_SIX_DP = 56.dp
+    val ONE_SIXTY_DP = 160.dp
 }

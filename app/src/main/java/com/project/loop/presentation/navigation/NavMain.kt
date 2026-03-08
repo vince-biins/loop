@@ -6,11 +6,11 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
@@ -21,7 +21,8 @@ import androidx.navigation3.ui.NavDisplay
 import com.project.loop.R
 import com.project.loop.base.navigation.MainRoute
 import com.project.loop.base.theme.LoopGradients
-import com.project.loop.presentation.home.HomeFeedScreen
+import com.project.loop.presentation.main.explore.ExploreScreen
+import com.project.loop.presentation.main.home.HomeFeedScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +52,14 @@ fun NavMain(modifier: Modifier = Modifier) {
                 modifier = modifier,
             )
         },
-        bottomBar = { BottomNavBar(selectedTab = MainRoute.Home, onSelectedTab = {}) }
+        bottomBar = {
+            BottomNavBar(
+                selectedTab = backStack.lastOrNull() as? MainRoute ?: MainRoute.Home,
+                onSelectedTab = {
+                    backStack.clear()
+                    backStack.add(it)
+                })
+        }
     ) {
         NavDisplay(
             modifier = Modifier.padding(it),
@@ -63,7 +71,7 @@ fun NavMain(modifier: Modifier = Modifier) {
             ),
             entryProvider = entryProvider {
                 entry<MainRoute.Home> { HomeFeedScreen() }
-                entry<MainRoute.Explore> { }
+                entry<MainRoute.Explore> { ExploreScreen() }
                 entry<MainRoute.Create> { }
                 entry<MainRoute.Notification> { }
                 entry<MainRoute.Profile> { }
